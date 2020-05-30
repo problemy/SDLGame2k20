@@ -1,9 +1,11 @@
 #include "Game.h"
 
+
 Game *game = nullptr;
 
 int main(int argc, char *argv[])
 {
+
 	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;
 
@@ -20,6 +22,7 @@ int main(int argc, char *argv[])
 		game->handleEvents();
 		game->update();
 		game->render();
+		
 
 		frameTime = SDL_GetTicks() - frameStart;
 

@@ -23,6 +23,7 @@ public:
 
 private:
 	bool isRunning = false;
+	bool playerAlive = true;
 	SDL_Window *window;
 
 };

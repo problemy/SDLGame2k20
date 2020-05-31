@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Map.h"
@@ -78,9 +78,14 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	
-		player->Update(); 
-	
+
+	//std::cout << "typ na mapie: " <<  << std::endl;
+	//std::cout << "kolizyjne wspulrzendne" << player->getCollisionX() / 32 << " y: " << player->getCollisionY() / 32 << std::endl;
+
+	// jeżeli gracz koliduje z typem kratki mapy == 1 nie wykona sie aktualizacja gracza == game over
+	if (map->getType(player->getCollisionX() / 32, (player->getCollisionY() / 32)) !=1) {
+		player->Update();
+	}
 	
 	coin->Update();
 	//bool Collision::checkCollision(SDL_Rect coin, SDL_Rect player);
@@ -91,13 +96,6 @@ void Game::update()
 	coin4->Update();
 	coin5->Update();
 	coin6->Update();
-	bool checkCollision(SDL_Rect player, SDL_Rect coin);
-  //std::cout << "Co tam" << coin->getRect() << std::endl;
-	if (!checkCollision)
-	{
-	 std::cout << " KOLIZJA KOIN" << std::endl;
-	}
-//	GameObject move(SDL_Rect coin);
 
 	player->setCollidingRects(map->getColliders());
 

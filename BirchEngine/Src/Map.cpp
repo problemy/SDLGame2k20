@@ -2,7 +2,6 @@
 #include "TextureManager.h"
 int counter;
 
-
 int lvl1[20][25] = {
 { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
 { 2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0 },
@@ -71,6 +70,7 @@ void Map::DrawMap()
 				collider.y = dest.y;
 				collider.h = collider.w = 32;
 				colliders.push_back(collider);
+				//collidingTiles.push_back(Tile::Tile(collider, type));
 				//std::cout << "collider made at :" << collider.x << "  y: " << collider.y << std::endl;
 			}
 			type = map[row][column];
@@ -101,9 +101,10 @@ std::vector<SDL_Rect> Map::getColliders()
 	return this->colliders;
 
 }
-/*
+
+
+
 int Map::getType(int row, int col){
 	return lvl1[row][col];
 
 }
-*/

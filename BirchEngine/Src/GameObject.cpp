@@ -1,6 +1,8 @@
 #include "GameObject.h"
 #include "TextureManager.h"
 #include "Collision.h"
+#include "Map.h"
+
 bool collided = false;
 GameObject::GameObject(const char* texturesheet, int x, int y)
 {
@@ -9,17 +11,17 @@ GameObject::GameObject(const char* texturesheet, int x, int y)
 	xpos = x;
 	ypos = y;
 
-	//Initialize the offsets
-	mPosX = 0;
-	mPosY = 0;
+	////Initialize the offsets
+	//mPosX = 0;
+	//mPosY = 0;
 
-	//Set collision box dimension
-	mCollider.w = 16;
-	mCollider.h = 16;
+	////Set collision box dimension
+	//mCollider.w = 16;
+	//mCollider.h = 16;
 
-	//Initialize the velocity
-	mVelX = 0;
-	mVelY = 0;
+	////Initialize the velocity
+	//mVelX = 0;
+	//mVelY = 0;
 }
 bool checkCollision(SDL_Rect a, SDL_Rect b)
 {		//std::cout << "check collicions" << std::endl;
@@ -30,7 +32,8 @@ bool checkCollision(SDL_Rect a, SDL_Rect b)
 			b.y + b.h >= a.y
 			)
 		{
-			std::cout << " collide physics" << std::endl;
+			std::cout << " collide physics at x :" << a.x << b.x << std::endl;
+			std::cout << " collide physics at y: " << a.y << b.y << std::endl;
 			return true;
 
 		}
@@ -40,49 +43,66 @@ bool checkCollision(SDL_Rect a, SDL_Rect b)
 	}
 
 
-
 void GameObject::Update()
 {
 
-	srcRect.h = 32;
-	srcRect.w = 32;
-	srcRect.x = 0;
-	srcRect.y = 0;
-
-	destRect.x = xpos;
-	destRect.y = ypos;
-	destRect.w = srcRect.w / 2;
-	destRect.h = srcRect.h / 2;
+	srcRect.h = srcRect.w  = 32;
+	srcRect.x = srcRect.y = 0;
 	if (!collided) {
-		std::cout << "Velocity" << velocity << std::endl;
+		xBeforeMove = xpos;
+		yBeforeMove = ypos;
+	}
+
+
+		//std::cout << "Velocity" << velocity << std::endl;
+
 		auto kstate = SDL_GetKeyboardState(NULL);
 		if (kstate[SDL_SCANCODE_LEFT]) {
 			xpos = xpos - 1 * velocity;
-			velocity += 0.3;
+			velocity += 0.01;
+
 		}
 		if (kstate[SDL_SCANCODE_RIGHT]) {
 			xpos = xpos + 1 * velocity;
-			velocity += 0.3;
+			velocity += 0.01;
 		}
 		if (kstate[SDL_SCANCODE_UP]) {
 			ypos = ypos - 1 * velocity;
-			velocity += 0.3;
+			velocity += 0.01;
 		}
 		if (kstate[SDL_SCANCODE_DOWN]) {
 			ypos = ypos + 1 * velocity;
-			velocity += 0.3;
+			velocity += 0.01;
 		}
+	
 
 		collider.x = xpos;
-		//std::cout << offset << " Offset" << std::endl;
 		collider.y = ypos;
 		collider.w = collider.h = 16;
 		collided = collideEnemy(collider);
-		if (velocity > 2.5) {
+		
+		std::cout << xpos << " x pos; " << ypos << "ypos;" << std::endl;
+		
+		if (collided) {
+			destRect.x = xBeforeMove;
+			destRect.y = yBeforeMove;
+			xpos = xBeforeMove;
+			ypos = yBeforeMove;
 			velocity = 1;
 		}
-	}
+		else {
+			destRect.x = xpos;
+			destRect.y = ypos;
+	
+		}
+
+
+
+		destRect.w = srcRect.w / 2;
+		destRect.h = srcRect.h / 2;
 }
+	
+
 void GameObject::move(SDL_Rect& coin)
 {
 	//Move the dot left or right
@@ -134,10 +154,21 @@ bool GameObject::collideEnemy(SDL_Rect player)
 		if (checkCollision(player, i))
 		{
 			std::cout << "ipos " << i.x << ":x  y:" << i.y << std::endl;
+			colisionX = i.x;
+			colisionY = i.y;
 			//std::cout << " collidegameobj " << std::endl;
 			return true;
 		}
 
 	}
 	return false;
+}
+
+int GameObject::getCollisionX() {
+	return colisionY;
+
+}
+
+int GameObject::getCollisionY() {
+	return colisionY;
 }

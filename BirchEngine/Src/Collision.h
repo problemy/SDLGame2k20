@@ -16,8 +16,8 @@ public:
 	~Collision();
 	bool checkCollision(SDL_Rect a, SDL_Rect b);
 	//static bool checkCollision(SDL_Rect A, SDL_Rect B);
-	static bool checkCoinCollision(SDL_Rect* coin, SDL_Rect* player);
-	static bool checkingCollision(SDL_Rect a, SDL_Rect b);
+	//static bool checkCoinCollision(SDL_Rect* coin, SDL_Rect* player);
+	//static bool checkingCollision(SDL_Rect a, SDL_Rect b);
 	void getType();
 private:
 

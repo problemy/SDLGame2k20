@@ -1,7 +1,9 @@
 #include "Coin.h"
 #include "TextureManager.h"
-
-
+int Coin::score = 0;
+bool coinColision;
+Collision* colision;
+int score = 0;
 Coin::Coin(const char* texturesheet, int x, int y, int mSpeed, int nFrames)
 {
 
@@ -11,10 +13,11 @@ Coin::Coin(const char* texturesheet, int x, int y, int mSpeed, int nFrames)
 	animated = true;
 	frames = nFrames;
 	speed = mSpeed;
+	alive = true;
 }
 
 
-void Coin::Update()
+void Coin::Update(SDL_Rect player)
 {
 
 
@@ -34,14 +37,34 @@ void Coin::Update()
 		srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
 	}
 
+	coinColision = colision->checkCollision(this->destRect, player );
+	if (coinColision) {
+		this->killCoin();
+		
+	}
+
 }
 void Coin::Render()
 {
-	SDL_RenderCopy(Game::renderer, coinTexture, &srcRect, &destRect);
-
+	if (alive) {
+		SDL_RenderCopy(Game::renderer, coinTexture, &srcRect, &destRect);
+	}
 }
 
- SDL_Rect* Coin::getRect()
+ SDL_Rect Coin::getRect()
 {
-	 return  &destRect;
+	 return  destRect;
 }
+
+ void Coin::killCoin() {
+	 alive = false;
+	 ++score;
+	 xpos = -80;
+	 ypos = -80;
+ }
+
+ bool Coin::isAlive() {
+
+	 return alive;
+ }
+

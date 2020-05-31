@@ -32,8 +32,8 @@ bool checkCollision(SDL_Rect a, SDL_Rect b)
 			b.y + b.h >= a.y
 			)
 		{
-			std::cout << " collide physics at x :" << a.x << b.x << std::endl;
-			std::cout << " collide physics at y: " << a.y << b.y << std::endl;
+			//std::cout << " collide physics at x :" << a.x << b.x << std::endl;
+			//std::cout << " collide physics at y: " << a.y << b.y << std::endl;
 			return true;
 
 		}
@@ -81,7 +81,7 @@ void GameObject::Update()
 		collider.w = collider.h = 16;
 		collided = collideEnemy(collider);
 		
-		std::cout << xpos << " x pos; " << ypos << "ypos;" << std::endl;
+		//std::cout << xpos << " x pos; " << ypos << "ypos;" << std::endl;
 		
 		if (collided) {
 			destRect.x = xBeforeMove;
@@ -103,32 +103,32 @@ void GameObject::Update()
 }
 	
 
-void GameObject::move(SDL_Rect& coin)
-{
-	//Move the dot left or right
-	mPosX += mVelX;
-	mCollider.x = mPosX;
-
-	//If the dot collided or went too far to the left or right
-	if ((mPosX < 0) || (mPosX + 16 > 800) || checkCollision(mCollider, coin))
-	{
-		//Move back
-		mPosX -= mVelX;
-		mCollider.x = mPosX;
-	}
-
-	//Move the dot up or down
-	mPosY += mVelY;
-	mCollider.y = mPosY;
-
-	//If the dot collided or went too far up or down
-	if ((mPosY < 0) || (mPosY + 16 > 640) || checkCollision(mCollider, coin))
-	{
-		//Move back
-		mPosY -= mVelY;
-		mCollider.y = mPosY;
-	}
-}
+//void GameObject::move(SDL_Rect& coin)
+//{
+//	//Move the dot left or right
+//	mPosX += mVelX;
+//	mCollider.x = mPosX;
+//
+//	//If the dot collided or went too far to the left or right
+//	if ((mPosX < 0) || (mPosX + 16 > 800) || checkCollision(mCollider, coin))
+//	{
+//		//Move back
+//		mPosX -= mVelX;
+//		mCollider.x = mPosX;
+//	}
+//
+//	//Move the dot up or down
+//	mPosY += mVelY;
+//	mCollider.y = mPosY;
+//
+//	//If the dot collided or went too far up or down
+//	if ((mPosY < 0) || (mPosY + 16 > 640) || checkCollision(mCollider, coin))
+//	{
+//		//Move back
+//		mPosY -= mVelY;
+//		mCollider.y = mPosY;
+//	}
+//}
 
 void GameObject::Render()
 {
@@ -136,10 +136,10 @@ void GameObject::Render()
 
 }
 
-/*SDL_Rect GameObject::getRect()
+SDL_Rect GameObject::getRect()
 {
 	return destRect;
-}*/
+}
 void GameObject::setCollidingRects(std::vector<SDL_Rect> vector)
 {
 	this->collidingRects = vector;
@@ -165,10 +165,14 @@ bool GameObject::collideEnemy(SDL_Rect player)
 }
 
 int GameObject::getCollisionX() {
-	return colisionY;
+	return colisionX;
 
 }
 
 int GameObject::getCollisionY() {
 	return colisionY;
+}
+
+void GameObject::addScore() {
+	score++;
 }

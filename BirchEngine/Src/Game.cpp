@@ -21,7 +21,7 @@ Map* map;
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = nullptr;
 //bool checkingCollision(SDL_Rect coin, SDL_Rect player);
-bool checkCollision(SDL_Rect player, SDL_Rect coin);
+//bool checkCollision(SDL_Rect player, SDL_Rect coin);
 Game::Game()
 {}
 
@@ -79,26 +79,26 @@ void Game::handleEvents()
 void Game::update()
 {
 
-	//std::cout << "typ na mapie: " <<  << std::endl;
-	//std::cout << "kolizyjne wspulrzendne" << player->getCollisionX() / 32 << " y: " << player->getCollisionY() / 32 << std::endl;
+	std::cout << "typ na mapie : " << map->getType((player->getCollisionX() / 32 ), (player->getCollisionY() / 32)) << std::endl;
+	std::cout << "kolizyjne wspulrzendne" << (player->getCollisionX() / 32) << " y: " << (player->getCollisionY() / 32)  << std::endl;
 
 	// jeżeli gracz koliduje z typem kratki mapy == 1 nie wykona sie aktualizacja gracza == game over
-	if (map->getType(player->getCollisionX() / 32, (player->getCollisionY() / 32)) !=1) {
+	/*if (map->getType(player->getCollisionX() / 32, (player->getCollisionY() / 32)) !=1) {
 		player->Update();
-	}
-	
-	coin->Update();
+	}*/
+	player->Update();
+	coin->Update(player->getRect());
 	//bool Collision::checkCollision(SDL_Rect coin, SDL_Rect player);
 //	std::cout << "czy dziala funkcja check colision " << colision->checkCoinCollision(player->getRect(), &coin->getRect()) << std::endl;
-	coin1->Update();
-	coin2->Update();
-	coin3->Update();
-	coin4->Update();
-	coin5->Update();
-	coin6->Update();
-
+	coin1->Update(player->getRect());
+	coin2->Update(player->getRect());
+	coin3->Update(player->getRect());
+	coin4->Update(player->getRect());
+	coin5->Update(player->getRect());
+	coin6->Update(player->getRect());
+	//std::cout << Coin::score << " score jest tutaj elo im" << std::endl;
 	player->setCollidingRects(map->getColliders());
-
+	
 }
 
 void Game::render()
@@ -108,8 +108,10 @@ void Game::render()
 	map->DrawMap();
 	player->Render();
 	coin->Render();
+
 	coin1->Render();
 	coin2->Render();
+
 	coin3->Render();
 	coin4->Render();
 	coin5->Render();

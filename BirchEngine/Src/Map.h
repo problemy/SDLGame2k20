@@ -9,10 +9,10 @@ public:
 	Map();
 	~Map();
 
-	void LoadMap(int arr[20][25]);
+	void LoadMap(double arr[20][25]);
 	void DrawMap();
 	//int getType(int row, int col);
-	int getType(int col, int row);
+	double getType(int col, int row);
 	SDL_Rect getBox();
 	//void Tile(int x, int y, int tileType);
 	SDL_Rect mBox;
@@ -31,6 +31,6 @@ private:
 	SDL_Rect collider;
 	//Tile collidingTile;
 	//Tile* tile;
-	int map[20][25];
+	double map[20][25];
 
 };

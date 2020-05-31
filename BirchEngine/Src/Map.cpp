@@ -2,7 +2,7 @@
 #include "TextureManager.h"
 int counter;
 
-int lvl1[20][25] = {
+double lvl1[20][25] = {
 { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
 { 2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0 },
 { 0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0 },
@@ -41,7 +41,7 @@ Map::Map()
 
 
 
-void Map::LoadMap(int arr[20][25] )
+void Map::LoadMap(double arr[20][25])
 {
 	for(int row = 0; row < 20; row++)
 	{
@@ -104,7 +104,7 @@ std::vector<SDL_Rect> Map::getColliders()
 
 
 
-int Map::getType(int row, int col){
-	return lvl1[row][col];
+double Map::getType(int row, int col){
+	return lvl1[col][row];
 
 }

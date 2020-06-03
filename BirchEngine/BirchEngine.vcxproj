@@ -98,7 +98,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Dev\Dev\SDL2_image-2.0.1\include;C:\Dev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Dev\Dev\SDL2_ttf-2.0.15\include;C:\Dev\Dev\SDL2_image-2.0.1\include;C:\Dev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Dev\Dev\SDL2_image-2.0.1\lib\x86;C:\Dev\BirchEngine\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -110,7 +110,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Dev\Dev\SDL2_image-2.0.1\include;C:\Dev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Dev\Dev\SDL2_ttf-2.0.15\include;C:\Dev\Dev\SDL2_image-2.0.1\include;C:\Dev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Dev\Dev\SDL2_image-2.0.1\lib\x86;C:\Dev\BirchEngine\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -155,6 +155,7 @@
     <ClCompile Include="Src\Collision.cpp" />
     <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\GameObject.cpp" />
+    <ClCompile Include="Src\Text.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\Map.cpp" />
     <ClCompile Include="Src\TextureManager.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Src\Collision.h" />
     <ClInclude Include="Src\Game.h" />
     <ClInclude Include="Src\GameObject.h" />
+    <ClInclude Include="Src\Text.h" />
     <ClInclude Include="Src\Map.h" />
     <ClInclude Include="Src\TextureManager.h" />
   </ItemGroup>

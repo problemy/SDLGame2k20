@@ -6,22 +6,25 @@
 
 class GameObject {
 	public:
-		//static const int player_vel = 10;
+		int frameWidth, frameHeight;
+		int textureWidth, textureHeight;
+
 		GameObject(const char* texturesheet,int x, int y);
 		~GameObject();
 		void Move();
 		void Update();
 		void Render();
 		SDL_Rect getRect();
-
-
-
 		void setCollidingRects(std::vector<SDL_Rect> vector);
 		int getCollisionX();
 		int getCollisionY();
 
 		bool collideEnemy(SDL_Rect player);
 		void addScore();
+		int getScore();
+		void updateStatus(int i);
+		void updateCoinStatus(int i);
+
 	private:
 
 		int score = 0;
@@ -38,9 +41,8 @@ class GameObject {
 		int frames = 0;
 		int speed = 100;
 		SDL_Rect collider;
-		//int mVelX, mVelY;
-		//int mPosX, mPosY;
+
 		int colisionX = 0;
 		int colisionY = 32;
-		//SDL_Rect mCollider;
+
 };

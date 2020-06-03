@@ -22,13 +22,14 @@ double lvl1[20][25] = {
 { 0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,1,1,1,2,1,1,1,1,1,1 },
 { 0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,1,1,1,2,2,1,1,1,1,1 },
 { 0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1 },
-{ 0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1 }
+{ 0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1 }
 };
 Map::Map()
 {
 	dirt = TextureManager::LoadTexture("assets/dirt.png");
 	grass = TextureManager::LoadTexture("assets/grass.png");
 	water = TextureManager::LoadTexture("assets/water.png");
+	meta = TextureManager::LoadTexture("assets/meta.png");
 	LoadMap(lvl1);
 
 	src.x = src.y = 0;
@@ -87,6 +88,9 @@ void Map::DrawMap()
 				break;
 
 			case 2:TextureManager::Draw(dirt, src, dest);
+				break;
+			case 3:TextureManager::Draw(meta, src, dest);
+				//std::cout << " meta jest x:" << dest.x << " y: " << dest.y << std::endl;
 				break;
 			default:
 				break;

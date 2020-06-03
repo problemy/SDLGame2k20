@@ -25,6 +25,7 @@ private:
 	bool isRunning = false;
 	bool playerAlive = true;
 	SDL_Window *window;
-
+	int status= 0;
+	SDL_Rect playerRect;
 };
 

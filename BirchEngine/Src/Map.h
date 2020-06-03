@@ -28,6 +28,7 @@ private:
 	SDL_Texture* dirt;
 	SDL_Texture* grass;
 	SDL_Texture* water;
+	SDL_Texture* meta;
 	SDL_Rect collider;
 	//Tile collidingTile;
 	//Tile* tile;

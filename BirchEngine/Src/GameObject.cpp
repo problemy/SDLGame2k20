@@ -11,17 +11,7 @@ GameObject::GameObject(const char* texturesheet, int x, int y)
 	xpos = x;
 	ypos = y;
 
-	////Initialize the offsets
-	//mPosX = 0;
-	//mPosY = 0;
 
-	////Set collision box dimension
-	//mCollider.w = 16;
-	//mCollider.h = 16;
-
-	////Initialize the velocity
-	//mVelX = 0;
-	//mVelY = 0;
 }
 bool checkCollision(SDL_Rect a, SDL_Rect b)
 {		//std::cout << "check collicions" << std::endl;
@@ -32,8 +22,7 @@ bool checkCollision(SDL_Rect a, SDL_Rect b)
 			b.y + b.h >= a.y
 			)
 		{
-			//std::cout << " collide physics at x :" << a.x << b.x << std::endl;
-			//std::cout << " collide physics at y: " << a.y << b.y << std::endl;
+
 			return true;
 
 		}
@@ -48,6 +37,8 @@ void GameObject::Update()
 
 	srcRect.h = srcRect.w  = 32;
 	srcRect.x = srcRect.y = 0;
+
+
 	if (!collided) {
 		xBeforeMove = xpos;
 		yBeforeMove = ypos;
@@ -60,21 +51,31 @@ void GameObject::Update()
 		if (kstate[SDL_SCANCODE_LEFT]) {
 			xpos = xpos - 1 * velocity;
 			velocity += 0.01;
+			srcRect.x = 64;
+			srcRect.y = 32;
 
 		}
 		if (kstate[SDL_SCANCODE_RIGHT]) {
 			xpos = xpos + 1 * velocity;
 			velocity += 0.01;
+			srcRect.x = 64;
+			srcRect.y = 64;
 		}
 		if (kstate[SDL_SCANCODE_UP]) {
 			ypos = ypos - 1 * velocity;
 			velocity += 0.01;
+			srcRect.x = 64;
+			srcRect.y = 96;
 		}
 		if (kstate[SDL_SCANCODE_DOWN]) {
 			ypos = ypos + 1 * velocity;
 			velocity += 0.01;
+			srcRect.x = 64;
+			srcRect.y = 0;
 		}
-	
+		
+
+
 
 		collider.x = xpos;
 		collider.y = ypos;
@@ -103,32 +104,8 @@ void GameObject::Update()
 }
 	
 
-//void GameObject::move(SDL_Rect& coin)
-//{
-//	//Move the dot left or right
-//	mPosX += mVelX;
-//	mCollider.x = mPosX;
-//
-//	//If the dot collided or went too far to the left or right
-//	if ((mPosX < 0) || (mPosX + 16 > 800) || checkCollision(mCollider, coin))
-//	{
-//		//Move back
-//		mPosX -= mVelX;
-//		mCollider.x = mPosX;
-//	}
-//
-//	//Move the dot up or down
-//	mPosY += mVelY;
-//	mCollider.y = mPosY;
-//
-//	//If the dot collided or went too far up or down
-//	if ((mPosY < 0) || (mPosY + 16 > 640) || checkCollision(mCollider, coin))
-//	{
-//		//Move back
-//		mPosY -= mVelY;
-//		mCollider.y = mPosY;
-//	}
-//}
+
+
 
 void GameObject::Render()
 {
@@ -161,6 +138,13 @@ bool GameObject::collideEnemy(SDL_Rect player)
 		}
 
 	}
+
+	if (player.x < 0 || player.x > 800-16) {
+		return true;
+	}
+	if (player.y < 0 || player.y > 640 - 16) {
+		return true;
+	}
 	return false;
 }
 
@@ -175,4 +159,62 @@ int GameObject::getCollisionY() {
 
 void GameObject::addScore() {
 	score++;
+}
+
+
+
+
+void GameObject::updateStatus(int i) {
+	destRect.x = 200;
+	destRect.y = 280;
+	destRect.w = srcRect.w;
+	destRect.h = srcRect.h;
+	switch (i) {
+	case 0:
+		srcRect.x = 0;
+		srcRect.y = 0;
+		srcRect.w = 0;
+		srcRect.h = 0;
+		break;
+	case 1:
+		srcRect.x = 0;
+		srcRect.y = 0;
+		srcRect.w = 400;
+		srcRect.h = 86;
+		break;
+	case 2:
+		srcRect.x = 0;
+		srcRect.y = 91;
+		srcRect.w = 400;
+		srcRect.h = 44;
+		break;
+	case 3:
+		srcRect.x = 0;
+		srcRect.y = 158;
+		srcRect.w = 400;
+		srcRect.h = 22;
+		break;
+	default:
+		break;
+	}
+
+
+}
+void GameObject::updateCoinStatus(int i)
+{
+	//if (i > 0) {
+		destRect.x = 520;
+		destRect.y = 5;
+		destRect.w = srcRect.w;
+		destRect.h = srcRect.h;
+		srcRect.x = 0;
+		srcRect.y = 28 * (i - 1);
+		srcRect.w = 280;
+		srcRect.h = 28;
+	//}
+}
+;
+
+int GameObject::getScore() {
+	return score;
 }
